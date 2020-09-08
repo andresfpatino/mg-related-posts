@@ -29,6 +29,7 @@ function mg_get_related_posts( $post_id, $post_count = 3 ) {
 	if( empty( $taxonomies ) ) return;
 
 	$args = [
+		'post__not_in'   => [$post_id],
 		'posts_per_page' => $post_count,
 		'tax_query'      => [
 			'relation' => 'OR',
@@ -65,7 +66,7 @@ function mg_get_related_posts( $post_id, $post_count = 3 ) {
 			<?php
 			while( $posts->have_posts() ): $posts->the_post(); ?>
 				<li class="mgrp__item">
-					<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
+					<a class="mgrp__item__fi" href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
 					<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
 				</li>
 			<?php endwhile;
